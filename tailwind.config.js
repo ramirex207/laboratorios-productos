@@ -7,6 +7,15 @@ module.exports = {
   ],
   theme: {
     extend: {
+      colors: {
+        oliva: {
+        '50':'#576F72',
+        '200':'#7D9D9C',
+        '500':'#E4DCCF',
+        '900':'#F0EBE3'
+      },
+
+  },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':
