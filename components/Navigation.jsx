@@ -13,7 +13,7 @@ function Navigation({ onClick }) {
                 
             <button
                 onClick={() => signOut()}
-                className='text-oliva-900 lg:text-lg lg:mr-4 lg:bg-red-500 bg-cyan-700 w-11/12 lg:w-20 hover:bg-cyan-500 p-2 m-8 lg:m-2 rounded-md self-center flex items-center justify-center mx-auto' // Agregamos "mx-auto" aquí
+                className='text-oliva-900 font-semibold lg:text-lg lg:mr-4 lg:bg-red-600 lg:text-black bg-teal-950 w-11/12 lg:w-20 hover:bg-teal-400 p-2 m-8 lg:m-2 rounded-md self-center flex items-center justify-center mx-auto uppercase' // Agregamos "mx-auto" aquí
             >
                 Salir
             </button>
