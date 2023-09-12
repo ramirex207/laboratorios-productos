@@ -13,8 +13,8 @@ function Nav() {
         <div>
             <div className='fixed top-0 left-0 w-full flex bg-teal-950 text-oliva-900 justify-between items-center bg-opacity-40' >
                 <div className='flex items-center justify-center'>
-                <FaMandalorian className='text-teal-500 text-5xl mx-4'/>
-                    <h1 className="text-4xl font-bold animate-color-change">LABORATORIOS</h1>
+                <FaMandalorian className='text-teal-500 text-5xl m-1'/>
+                    <h1 className="lg:text-4xl text-2xl font-bold animate-color-change">LABORATORIOS</h1>
                     
                 </div>
                 <div className='hidden lg:block lg:h-20'>

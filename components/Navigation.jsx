@@ -8,7 +8,7 @@ function Navigation({ onClick }) {
     const userRole = session?.data?.user?.role
     //console.log(userRole)
     return (
-        <ul className=" bg-cyan-900 lg:bg-transparent rounded-xl lg:flex lg:flex-row-reverse flex flex-col justify-center lg:mt-4 pb-6 z-10" onClick={onClick}>
+        <ul className=" bg-teal-800 lg:bg-transparent rounded-xl lg:flex lg:flex-row-reverse flex flex-col justify-center lg:mt-4 pb-6 z-10" onClick={onClick}>
             { session.data?.user?.role === "admin" ? (<>
                 
             <button
@@ -37,14 +37,14 @@ function Navigation({ onClick }) {
                 {!session.data? (<>
 
             <Link href='/login' className="lg:max-h-20">
-            <li className='text-slate-100 border border-1 border-cyan-950 hover:border-cyan-200 p-2 m-2 mx-4 rounded-md self-center flex items-center justify-center '>
+            <li className='text-slate-100 border border-1 border-teal-950 hover:border-teal-200 p-2 m-2 mx-4 rounded-md self-center flex items-center justify-center '>
                 <button className="lg:w-full">
                     Iniciar Sesión
                 </button>
             </li>
             </Link>
             <Link className="lg:max-h-20" href='/register'>
-            <li className='text-white bg-cyan-950 hover:bg-cyan-500 p-2 m-2 rounded-md self-center flex items-center justify-center mx-4'>
+            <li className='text-white bg-teal-950 hover:bg-teal-400 p-2 m-2 rounded-md self-center flex items-center justify-center mx-4'>
                 <button className="lg:w-full">
                     Registrarse
                 </button>
