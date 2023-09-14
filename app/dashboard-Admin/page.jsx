@@ -1,9 +1,14 @@
-import React from 'react'
+import Dashboard from "@components/dashboard/Dashboard"
 
-function DashboardAdminPage() {
+
+
+
+function DashboardPage() {
   return (
-    <div>DashboardAdminPage</div>
+    <div className='text-white'>
+        <Dashboard />
+    </div>
   )
 }
 
-export default DashboardAdminPage
+export default DashboardPage

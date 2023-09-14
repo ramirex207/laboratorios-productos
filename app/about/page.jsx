@@ -3,7 +3,7 @@
 
 function AboutPage() {
   return (
-    <div className=" text-slate-900 mt-24">
+    <div className=" text-slate-900 mt-24 h-screen">
       <div className="mx-auto">
 
         {/* Fila 1 */}
