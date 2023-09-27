@@ -20,7 +20,7 @@ async function getUsers(){
 
 async function ClientsPage() {
   const {Users} = await getUsers();
-  console.log(Users)
+  
 
   return (
     
