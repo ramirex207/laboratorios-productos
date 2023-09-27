@@ -1,9 +1,10 @@
+import ButtonAgregar from "@components/proveedores/ButtonAgregar";
 import ProvidersView from "@components/proveedores/ProvidersView";
 
 async function getUsers(){
   const apiUrl = process.env.API_URL;
   try {
-    const res = await fetch(`${apiUrl}/api/user`, {
+    const res = await fetch(`${apiUrl}/api/proveedores`, {
       method: 'GET',
       cache: 'no-store',
     });
@@ -19,11 +20,12 @@ async function getUsers(){
 }
 
 async function ProveedoresPage() {
-  const {Users} = await getUsers();
- // console.log(Users)
+  const {proveedores} = await getUsers();
+  //console.log(proveedores)
   return (
     <div>
-        <ProvidersView proveedores={Users}/>
+        <ButtonAgregar/>
+        <ProvidersView proveedores={proveedores}/>
     </div>
   )
 }

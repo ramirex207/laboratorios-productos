@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 
 
-function ContactForm () {
+function ProviderForm () {
   const router = useRouter();
   // Estado para almacenar los datos del formulario
   const [formData, setFormData] = useState({
@@ -89,4 +89,4 @@ function ContactForm () {
   );
 };
 
-export default ContactForm;
+export default ProviderForm;
