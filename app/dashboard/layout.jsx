@@ -1,12 +1,15 @@
-import Aside from "@components/Aside";
+import {BrowserRouter, Route, Routes  } from 'react-router-dom';
+import Sidebar from '@components/dashboard/Sidebar'
+import Aside from '@components/Aside';
 
 export default function DashboardLayout({ children }) {
   return (
-    <section className="lg:flex fixed z-0 -mt-6 lg:mt-0">
-      <aside className="lg:w-1/4">
-        <Aside />
-      </aside>
-      <main className="lg:w-3/4 lg:pl-10 lg:mt-20">{children}</main>
-    </section>
+    <section className="lg:flex">
+    <aside className=" lg:mt-20 lg:fixed ">
+      <Aside />
+    </aside>
+
+    <main className="lg:w-full lg:mt-20 p-4 lg:pl-80" >{children}</main>
+  </section>
   );
 }

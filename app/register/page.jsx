@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation'
 import { FaUserAlt,FaLock } from 'react-icons/fa'
 import {GrMail} from 'react-icons/gr'
 import {AiFillEye,AiFillEyeInvisible} from 'react-icons/ai'
+import Image from 'next/image';
 
 
 function RegisterPage() {
@@ -53,7 +54,7 @@ function RegisterPage() {
       }
 
       //console.log(res)
-      router.push('/dashboard/profile')
+      router.push('/profile')
       
  
     } catch (error) {
@@ -81,14 +82,12 @@ function RegisterPage() {
         }
       <div className='lg:flex rounded-md shadow-2xl bg-teal-500 bg-opacity-20'>
       
-        <div className='bg-teal-950 p-2 flex justify-center items-center text-teal-50 shadow-2xl bg-opacity-80'>
-          <h1 className="text-4xl text-center text-slate-50 font-bold">
-            Laboratorios
-          </h1>
+      <div className='bg-emerald-400 p-2 flex justify-center items-center text-teal-50 shadow-2xl bg-opacity-60'>
+        <Image src='/vamasol1.png' alt="logo" width={150} height={150} />
         </div>
   
         <form onSubmit={handleSubmit}
-          className=' p-4 max-w-md mx-auto lg:max-w-none my-4'
+          className=' p-4 max-w-md mx-auto lg:max-w-none my-4 h-96 flex flex-col justify-center'
         >
           <div className='flex bg-teal-100 items-center h-10 mb-4 px-4 rounded-full'>
           <input type="text" placeholder='Joe Doe' 

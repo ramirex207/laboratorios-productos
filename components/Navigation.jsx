@@ -18,17 +18,17 @@ function Navigation({ onClick }) {
                 Salir
             </button>
                 <Link href='/dashboard-Admin' className="lg:max-h-20">
-                <li className='text-white mx-5 py-2 border-b-2 hover:bg-zinc-800 hover:opacity-40 lg:hover:bg-transparent lg:hover:opacity-100'>
+                <li className=' mx-5 py-2 border-b-2 hover:bg-zinc-800 hover:opacity-40 lg:hover:bg-transparent lg:hover:opacity-100'>
                     <h4 className="transition duration-300 ease-in-out transform hover:-translate-x-2">Panel de Administrador</h4>
                 </li>
             </Link>             
             <Link href='/chatAI' className="lg:max-h-20">
-            <li className='text-white mx-5 py-2 border-b-2 hover:bg-zinc-800 hover:opacity-40 lg:hover:bg-transparent lg:hover:opacity-100'>
+            <li className=' mx-5 py-2 border-b-2 hover:bg-zinc-800 hover:opacity-40 lg:hover:bg-transparent lg:hover:opacity-100'>
                 <h4 className="transition duration-300 ease-in-out transform hover:-translate-x-2" >Chat informativo</h4>
             </li>
             </Link>
-            <Link href='/dashboard/profile' className="lg:max-h-20">
-            <li className='text-white mx-5 py-2 border-b-2 hover:bg-zinc-800 hover:opacity-40 lg:hover:bg-transparent lg:hover:opacity-100'>
+            <Link href='/profile' className="lg:max-h-20">
+            <li className='mx-5 py-2 border-b-2 hover:bg-zinc-800 hover:opacity-40 lg:hover:bg-transparent lg:hover:opacity-100'>
                 <h4 className="transition duration-300 ease-in-out transform hover:-translate-x-2" >Perfil</h4>
                 
             </li>
@@ -37,7 +37,7 @@ function Navigation({ onClick }) {
                 {!session.data? (<>
 
             <Link href='/login' className="lg:max-h-20">
-            <li className='text-slate-100 border border-1 border-teal-950 hover:border-teal-200 p-2 m-2 mx-4 rounded-md self-center flex items-center justify-center '>
+            <li className=' border border-1 border-teal-950 hover:border-teal-200 p-2 m-2 mx-4 rounded-md self-center flex items-center justify-center '>
                 <button className="lg:w-full">
                     Iniciar Sesión
                 </button>
@@ -89,7 +89,7 @@ function Navigation({ onClick }) {
             </li>
             </Link>
 
-                        </>)
+            </>)
 
             }
             

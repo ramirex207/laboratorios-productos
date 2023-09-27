@@ -1,8 +1,7 @@
 "use client"
-
-import {FaMandalorian} from 'react-icons/fa'
 import Navigation from './Navigation'
 import { useState } from 'react'
+import Image from 'next/image'
 
 function Nav() {
     const [menuVisible, setMenuVisible] = useState(false);
@@ -11,11 +10,9 @@ function Nav() {
     };
     return (
         <div>
-            <div className='fixed top-0 z-10 left-0 w-full flex bg-teal-800 text-oliva-900 justify-between items-center bg-opacity-50' >
-                <div className='flex items-center justify-center'>
-                <FaMandalorian className='text-teal-500 text-5xl m-1'/>
-                    <h1 className="lg:text-4xl text-2xl font-bold animate-color-change">LABORATORIOS</h1>
-                    
+            <div className='fixed top-0 z-10 left-0 w-full flex bg-emerald-800 text-slate-100 justify-between items-center bg-opacity-40' >
+                <div className='flex items-center justify-center ml-4'>
+                <Image src='/vamasol1.png' alt="logo" width={120} height={120} />
                 </div>
                 <div className='hidden lg:block lg:h-20'>
                     <Navigation />
@@ -36,8 +33,6 @@ function Nav() {
                     
                 )}
             </div>
-
-
         </div>
     )
 }

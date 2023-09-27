@@ -2,12 +2,15 @@
 import React, { useState, useEffect } from "react";
 import Link from 'next/link';
 import {ImLab, ImUsers} from 'react-icons/im'
+import { useSession } from "next-auth/react";
 
 import { FaUsers,FaUser,  FaUserMd, FaUserInjured,FaUserNurse,FaCalendarAlt, FaChartBar, FaCommentMedical,FaClinicMedical, FaClipboardList } from 'react-icons/fa'
 
 
 
 function Aside() {
+  const {data:session,status} = useSession()
+  console.log(session,status)
   const [menuVisible, setMenuVisible] = useState(false);
   const toggleMenu = () => {
     setMenuVisible(prevMenuVisible => !prevMenuVisible);
@@ -42,7 +45,7 @@ function Aside() {
   };
 
   return (
-    <div className="text-slate-800 text-xl lg:fixed bg-sky-700 bg-opacity-20 shadow-lg">
+    <div className="text-slate-800 text-xl bg-sky-700 bg-opacity-20 shadow-lg overflow-y-auto" >
       <div className="lg:flex">
         <button onClick={toggleMenu} className="block lg:hidden">
           Panel de Administrador
@@ -56,20 +59,30 @@ function Aside() {
               
             </div>
             <div>
-              <h2 className="text-center">ramiro cuevas</h2>
+              <h2 className="text-center">{session.user.name}</h2>
+              <h2 className="text-center">{session.user.email}</h2>
+              <h2 className="text-center">{session.user.role}</h2>
             </div>
               <ul className=" lg:min-h-[100vh] lg:block  ">
-              <Link href='/dashboard-Admin/clientes' className="hover:text-slate-400 " onClick={hideMenuOnClick}>
+              <Link href='/dashboard-Admin/proveedores' className="hover:text-slate-400 " onClick={hideMenuOnClick}>
 
-                <li className="m-4 pr-2 my-8 border-r-2 flex items-center ">
+                <li className="m-4 pr-2 my-4 border-r-2 flex items-center ">
                   <FaUsers className="mr-2" />
                   <h4 className="transition duration-300 ease-in-out transform hover:translate-x-3">
-                    Gestión de Clientes
+                    Gestión de Proveedores
+                  </h4>
+                </li>
+              </Link>
+              <Link href='/dashboard-Admin/insumos' className="hover:text-slate-400" onClick={hideMenuOnClick}>
+                <li className="m-4 pr-2 my-4 border-r-2 flex items-center">
+                  <ImUsers className="mr-2" />
+                  <h4 className="transition duration-300 ease-in-out transform hover:translate-x-3">
+                    Gestión de Insumos
                   </h4>
                 </li>
               </Link>
               <Link href='/dashboard-Admin/productos' className="hover:text-slate-400 " onClick={hideMenuOnClick}>
-                <li className="m-4 my-8 pr-2 border-r-2 flex items-center">
+                <li className="m-4 my-4 pr-2 border-r-2 flex items-center">
                   <ImLab className="mr-2" />
                   <h4 className="transition duration-300 ease-in-out transform hover:translate-x-3">
                     Gestión de Productos
@@ -77,23 +90,24 @@ function Aside() {
                 </li>
               </Link>
               <Link href='/dashboard-Admin/usuarios' className="hover:text-slate-400" onClick={hideMenuOnClick}>
-                <li className="m-4 pr-2 my-8 border-r-2 flex items-center">
+                <li className="m-4 pr-2 my-4 border-r-2 flex items-center">
                   <ImUsers className="mr-2" />
                   <h4 className="transition duration-300 ease-in-out transform hover:translate-x-3">
-                    Gestión de Usuarios
+                    Gestión de Clientes
                   </h4>
                 </li>
               </Link>
+              
               <Link href='/dashboard-Admin/existencias' className="hover:text-slate-400" onClick={hideMenuOnClick}>
-                <li className="m-4 pr-2 my-8 border-r-2 flex items-center">
+                <li className="m-4 pr-2 my-4 border-r-2 flex items-center">
                   <FaCalendarAlt className="mr-2" />
                   <h4 className="transition duration-300 ease-in-out transform hover:translate-x-3">
-                    Gestión de Existencias
+                    Gestión de Lotes
                   </h4>
                 </li>
               </Link>
               <Link href='/dashboard-Admin/existencias' className="hover:text-slate-200" onClick={hideMenuOnClick}>
-                <li className="m-4 pr-2 my-8 border-r-2 flex items-center">
+                <li className="m-4 pr-2 my-4 border-r-2 flex items-center">
                   <FaChartBar className="mr-2" />
                   <h4 className="transition duration-300 ease-in-out transform hover:translate-x-3">
                     Analisis y Monitoreo
@@ -102,7 +116,7 @@ function Aside() {
               </Link>
 
               <Link href='/dashboard-Admin/existencias' className="hover:text-slate-200" onClick={hideMenuOnClick}>
-                <li className="m-4 pr-2 my-8 border-r-2 flex items-center">
+                <li className="m-4 pr-2 my-4 border-r-2 flex items-center">
                   <FaClinicMedical className="mr-2" />
                   <h4 className="transition duration-300 ease-in-out transform hover:translate-x-3">
                     Seguimiento y progreso
@@ -111,7 +125,7 @@ function Aside() {
               </Link>
 
               <Link href='/dashboard-Admin/existencias' className="hover:text-slate-200" onClick={hideMenuOnClick}>
-                <li className="m-4 pr-2 my-8 border-r-2 flex items-center">
+                <li className="m-4 pr-2 my-4 border-r-2 flex items-center">
                   <FaClipboardList className="mr-2" />
                   <h4 className="transition duration-300 ease-in-out transform hover:translate-x-3">
                     Reportes

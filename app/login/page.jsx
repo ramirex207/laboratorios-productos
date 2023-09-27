@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import {GrMail} from 'react-icons/gr'
+import Image from 'next/image';
 import {AiFillEye,AiFillEyeInvisible} from 'react-icons/ai'
 
 function LoginPage() {
@@ -34,7 +35,7 @@ function LoginPage() {
       //console.log(res)
       if((await res).error === null){
           console.log("ok")
-          return Router.push("/dashboard/profile")
+          return Router.push("/dashboard-Admin")
       }
       else{
           setError(res.error)
@@ -51,14 +52,12 @@ function LoginPage() {
   return (
     <div className="justify-center h-[calc(100vh-4rem)] flex items-center">
       <div className='lg:flex rounded-md shadow-2xl bg-teal-500 bg-opacity-20'>
-      <div className='bg-teal-950 p-2 flex justify-center items-center text-teal-50 shadow-2xl bg-opacity-60'>
-          <h1 className="text-4xl text-center text-slate-50 font-bold">
-            Laboratorios
-          </h1>
+        <div className='bg-emerald-400 p-2 flex justify-center items-center text-teal-50 shadow-2xl bg-opacity-60'>
+        <Image src='/vamasol1.png' alt="logo" width={150} height={150} />
         </div>
         <form
           onSubmit={handleSubmit}
-          className=' p-4 max-w-md mx-auto lg:max-w-none my-4'
+          className=' p-4 max-w-md mx-auto lg:max-w-none my-4 h-96 flex flex-col justify-center'
         >
           
 
