@@ -4,11 +4,12 @@ import {useSession} from 'next-auth/react'
 
 function DashboardPage() {
     const {data:session,status} = useSession()
-   // console.log(session)
+    // console.log(session)
     //const userSession = session?.user.role
     //console.log(userSession)
   return (
-    <div>DashboardPage
+    <div>
+      DashboardPage
     </div>
   )
 }

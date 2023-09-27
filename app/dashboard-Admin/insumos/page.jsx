@@ -29,9 +29,8 @@ async function getProvidersName(){
         throw new Error(res.status)
       }
       const data = await res.json();
-     const allProviders = data.proveedores     
-      const filteredUsers = allProviders.filter(proveedor => proveedor.nombre === 'ramiro');
-      return filteredUsers;
+    
+      return data;
     } catch (error) {
       console.log("Error cargando usuarios",error)
     }
@@ -40,12 +39,13 @@ async function getProvidersName(){
 
 async function InsumosPage() {
   const {insumos} = await getInsumos();
-  const {proveedores} = await getProvidersName();
-  console.log(proveedores)
+  const provider = await getProvidersName();
+  //console.log(provider)
   
   return (
     <div>
-        <InsumosView insumos={insumos} proveedores={proveedores}/>
+        <InsumosView insumos={insumos} proveedor={provider}/>
+        <InsumosForm/>
     </div>
   )
 }

@@ -21,6 +21,8 @@ function ProfilePage() {
             <p className='text-slate-800 lg:text-3xl'>Email: {user.email}</p>
             {/* Agrega otros campos del usuario que desees mostrar */}
             
+            
+
             <button
                 onClick={() => signOut()}
                 className='text-white bg-zinc-950 hover:bg-zinc-700 p-2 m-2 rounded-md self-center flex items-center justify-center mx-auto' // Agregamos "mx-auto" aquí

@@ -10,7 +10,7 @@ import { FaUsers,FaUser,  FaUserMd, FaUserInjured,FaUserNurse,FaCalendarAlt, FaC
 
 function Aside() {
   const {data:session,status} = useSession()
-  console.log(session,status)
+  //console.log(session,status)
   const [menuVisible, setMenuVisible] = useState(false);
   const toggleMenu = () => {
     setMenuVisible(prevMenuVisible => !prevMenuVisible);

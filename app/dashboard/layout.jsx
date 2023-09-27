@@ -8,7 +8,6 @@ export default function DashboardLayout({ children }) {
     <aside className=" lg:mt-20 lg:fixed ">
       <Aside />
     </aside>
-
     <main className="lg:w-full lg:mt-20 p-4 lg:pl-80" >{children}</main>
   </section>
   );
