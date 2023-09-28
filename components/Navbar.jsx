@@ -12,7 +12,7 @@ function Nav() {
         <div>
             <div className='fixed top-0 z-10 left-0 w-full flex bg-emerald-800 text-slate-100 justify-between items-center bg-opacity-40' >
                 <div className='flex items-center justify-center ml-4'>
-                <Image src='/vamasol1.png' alt="logo" width={120} height={120} />
+                <Image src='/vamassf2.png' alt="logo" width={120} height={120} />
                 </div>
                 <div className='hidden lg:block lg:h-20'>
                     <Navigation />

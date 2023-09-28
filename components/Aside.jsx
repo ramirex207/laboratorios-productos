@@ -4,7 +4,7 @@ import Link from 'next/link';
 import {ImLab, ImUsers} from 'react-icons/im'
 import { useSession } from "next-auth/react";
 
-import { FaUsers,FaUser,  FaUserMd, FaUserInjured,FaUserNurse,FaCalendarAlt, FaChartBar, FaCommentMedical,FaClinicMedical, FaClipboardList, FaBriefcaseMedical } from 'react-icons/fa'
+import { FaUsers,FaUser,  FaUserMd, FaUserInjured,FaUserNurse,FaCalendarAlt, FaChartBar, FaCommentMedical,FaClinicMedical, FaClipboardList, FaBriefcaseMedical, FaCogs, FaBoxes } from 'react-icons/fa'
 
 
 
@@ -100,7 +100,7 @@ function Aside() {
               
               <Link href='/dashboard-Admin/existencias' className="hover:text-slate-400" onClick={hideMenuOnClick}>
                 <li className="m-4 pr-2 my-4 border-r-2 flex items-center">
-                  <FaCalendarAlt className="mr-2" />
+                  <FaBoxes className="mr-2" />
                   <h4 className="transition duration-300 ease-in-out transform hover:translate-x-3">
                     Gestión de Lotes
                   </h4>
@@ -134,7 +134,7 @@ function Aside() {
               </Link>
               <Link href='/dashboard-Admin/existencias' className="hover:text-slate-200" onClick={hideMenuOnClick}>
                 <li className="m-4 pr-2 my-8 mt-20 border-r-2 flex items-center">
-                  <FaUsers className="mr-2" />
+                  <FaCogs className="mr-2" />
                   <h4 className="transition duration-300 ease-in-out transform hover:translate-x-3">
                     Configuración
                   </h4>

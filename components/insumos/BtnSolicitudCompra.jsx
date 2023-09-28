@@ -6,7 +6,7 @@ function BtnSolicitudCompra() {
   return (
     <button 
     className='bg-cyan-700 px-4 py-2 my-2 rounded-lg mt-4 hover:bg-cyan-400 hover:text-zinc-700 hover:transition-transform w-full text-slate-300 font-bold' 
-    onClick={() => router.push('/dashboard-Admin/insumos/register')}>  
+    onClick={() => router.push('/dashboard-Admin/insumos/compra')}>  
         Solicitud de Compra
     </button>
   )
