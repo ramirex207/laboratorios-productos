@@ -3,10 +3,10 @@ import Ingredient from "@/models/ingrediente";
 import { NextResponse } from "next/server";
 
 export async function POST(request) {
-  const { nombre, descripcion, precio_unitario, unidad_medida, proveedor } = await request.json();
+  const { nombre, descripcion, precio_unitario, unidad_medida, proveedor, cantidad } = await request.json();
   await connectMongoDB();
-  await Ingredient.create({ nombre,descripcion,precio_unitario,unidad_medida,proveedor});
-  return NextResponse.json({ message: "Proveedor creado" }, { status: 201 });
+  await Ingredient.create({ nombre,descripcion,precio_unitario,unidad_medida,proveedor,cantidad});
+  return NextResponse.json({ message: "Insumo creado" }, { status: 201 });
 }
 
 export async function GET() {

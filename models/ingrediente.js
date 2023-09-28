@@ -30,6 +30,13 @@ const ingredientSchema = new Schema({
         ref: "Proveedor",
         required: [true, "proveedor es requerido"],
     },
+    timestamp: {
+        type: Date,
+        default: Date.now(),
+    },
+    cantidad:{
+        type: Number,
+    },    
 });
 
 export default models.Ingredient || model("Ingredient", ingredientSchema);
