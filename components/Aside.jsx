@@ -4,7 +4,7 @@ import Link from 'next/link';
 import {ImLab, ImUsers} from 'react-icons/im'
 import { useSession } from "next-auth/react";
 
-import { FaUsers,FaUser,  FaUserMd, FaUserInjured,FaUserNurse,FaCalendarAlt, FaChartBar, FaCommentMedical,FaClinicMedical, FaClipboardList } from 'react-icons/fa'
+import { FaUsers,FaUser,  FaUserMd, FaUserInjured,FaUserNurse,FaCalendarAlt, FaChartBar, FaCommentMedical,FaClinicMedical, FaClipboardList, FaBriefcaseMedical } from 'react-icons/fa'
 
 
 
@@ -75,7 +75,7 @@ function Aside() {
               </Link>
               <Link href='/dashboard-Admin/insumos' className="hover:text-slate-400" onClick={hideMenuOnClick}>
                 <li className="m-4 pr-2 my-4 border-r-2 flex items-center">
-                  <ImUsers className="mr-2" />
+                  <FaBriefcaseMedical className="mr-2" />
                   <h4 className="transition duration-300 ease-in-out transform hover:translate-x-3">
                     Gestión de Insumos
                   </h4>

@@ -11,7 +11,6 @@ export async function POST(request) {
 
 export async function GET() {
   try {
-
   await connectMongoDB();
   const proveedores = await Proveedor.find();
   return NextResponse.json({ proveedores });
