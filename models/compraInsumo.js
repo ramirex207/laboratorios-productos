@@ -1,6 +1,6 @@
 import { Schema, models, model } from "mongoose";
 
-const loteSchema = new mongoose.Schema({
+const loteSchema = new Schema({
     numeroLote: String,
     fechaVencimiento: Date,
     cantidad: Number,
@@ -27,12 +27,12 @@ const CompraInsumoSchema = new Schema({
     },
     
     fecha_solicitud:{
-        type: Date.now(),
-        required: [true, "fecha es requerido"],
-    },
-    fecha_caducidad:{
         type: Date,
-        required: [true, "fecha es requerido"],
+        
+    },
+    fecha_requerida:{
+        type: Date,
+        
     },
     nombreDepartamento:{
         type: String,
@@ -40,7 +40,7 @@ const CompraInsumoSchema = new Schema({
     insumos: [
         {
             insumo: {
-                type: mongoose.Schema.Types.ObjectId,
+                type: Schema.Types.ObjectId,
                 ref: 'Insumo',
             },
             cantidad: Number,

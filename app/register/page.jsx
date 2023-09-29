@@ -141,7 +141,7 @@ function RegisterPage() {
           <div className='flex bg-teal-100 items-center h-10 mb-4 px-4 rounded-full'>
           <input
             type="text"
-            placeholder="Código de empleado"
+            placeholder="Código de administrador"
             name="employeeCode"
             onChange={handleInputChange}
             className='w-full bg-transparent flex outline-none items-center italic'

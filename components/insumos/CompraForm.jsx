@@ -27,6 +27,7 @@ function CompraForm() {
   ]);
 
   const onSubmit = (data) => {
+    
     // Aquí puedes enviar los datos al servidor
     console.log(data);
   };
@@ -61,6 +62,18 @@ function CompraForm() {
           type="text"
           id="almacen"
           {...register('almacen', { required: true })}
+          className="border rounded-md p-2 w-full"
+        />
+        {errors.almacen && <p className="text-red-500">Este campo es requerido</p>}
+      </div>
+      <div className="mb-4">
+        <label htmlFor="procedencia" className="block text-gray-600">
+          Procedencia:
+        </label>
+        <input
+          type="text"
+          id="procedencia"
+          {...register('procedencia', { required: true })}
           className="border rounded-md p-2 w-full"
         />
         {errors.almacen && <p className="text-red-500">Este campo es requerido</p>}
