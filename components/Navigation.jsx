@@ -21,12 +21,17 @@ function Navigation({ onClick }) {
                 <li className=' mx-5 py-2 border-b-2 hover:bg-zinc-800 hover:opacity-40 lg:hover:bg-transparent lg:hover:opacity-100'>
                     <h4 className="transition duration-300 ease-in-out transform hover:-translate-x-2">Panel de Administrador</h4>
                 </li>
-            </Link>             
+            </Link>{
+                /*
+                       
             <Link href='/chatAI' className="lg:max-h-20">
             <li className=' mx-5 py-2 border-b-2 hover:bg-zinc-800 hover:opacity-40 lg:hover:bg-transparent lg:hover:opacity-100'>
                 <h4 className="transition duration-300 ease-in-out transform hover:-translate-x-2" >Chat informativo</h4>
             </li>
             </Link>
+
+                */
+            }      
             <Link href='/profile' className="lg:max-h-20">
             <li className='mx-5 py-2 border-b-2 hover:bg-zinc-800 hover:opacity-40 lg:hover:bg-transparent lg:hover:opacity-100'>
                 <h4 className="transition duration-300 ease-in-out transform hover:-translate-x-2" >Perfil</h4>
@@ -64,12 +69,19 @@ function Navigation({ onClick }) {
             <li className='text-white mx-5  border-b-2 hover:opacity-40 lg:hover:bg-transparent lg:hover:opacity-100'>
                 <h4 className="transition duration-300 ease-in-out transform hover:-translate-x-2  hover:bg-zinc-900 lg:hover:bg-transparent py-2" >Inicio</h4>
             </li>
-            </Link>                
-            <Link href='/chatAI' className="lg:max-h-20">
+            </Link>
+            {
+                /*
+                <Link href='/chatAI' className="lg:max-h-20">
             <li className='text-white mx-5 border-b-2 hover:opacity-40 lg:hover:bg-transparent lg:hover:opacity-100'>
                 <h4 className="transition duration-300 ease-in-out transform hover:-translate-x-2  hover:bg-zinc-900 lg:hover:bg-transparent py-2" >Chat informativo</h4>
             </li>
             </Link>
+                */
+
+            }
+
+            
             <Link href='/dashboard/profile' className="lg:max-h-20">
             <li className='text-white mx-5 border-b-2 hover:opacity-40 lg:hover:bg-transparent lg:hover:opacity-100'>
                 <h4 className="transition duration-300 ease-in-out transform hover:-translate-x-2  hover:bg-zinc-900 lg:hover:bg-transparent py-2" >Perfil</h4>
