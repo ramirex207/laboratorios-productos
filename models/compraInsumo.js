@@ -1,6 +1,12 @@
 import { Schema, models, model } from "mongoose";
 
+const loteSchema = new mongoose.Schema({
+    numeroLote: String,
+    fechaVencimiento: Date,
+    cantidad: Number,
+  });
 const CompraInsumoSchema = new Schema({
+    
     almacen:{
         type: String,
         required: [true, "nombre del almacen es requerido"],
@@ -31,12 +37,20 @@ const CompraInsumoSchema = new Schema({
     nombreDepartamento:{
         type: String,
     },
-    insumo:{
-        type: Schema.Types.ObjectId,
-        ref: "Ingrediente",
-    },
-    lote:Schema.Types.ObjectId,
-    ref: "Lote",
+    insumos: [
+        {
+            insumo: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'Insumo',
+            },
+            cantidad: Number,
+            precioUnitario: Number,
+        },
+    ],
+    lote:[loteSchema],
+    existencia:{
+        type: Number,
+    },  
 });
 
-export default models.Insumo || model("Insumo", CompraInsumoSchema);
+export default models.CompraInsumo || model("CompraInsumo", CompraInsumoSchema);

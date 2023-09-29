@@ -53,7 +53,8 @@ function LoginPage() {
     <div className="justify-center h-[calc(100vh-4rem)] flex items-center">
       <div className='lg:flex rounded-md shadow-2xl bg-teal-500 bg-opacity-20'>
         <div className='bg-emerald-400 p-2 flex justify-center items-center text-teal-50 shadow-2xl bg-opacity-60'>
-        <Image src='/vamassf2.png' alt="logo" width={200} height={200} />
+        <Image src='/vamassf2.png' alt="logo" width={200} height={200} 
+        priority/>
         </div>
         <form
           onSubmit={handleSubmit}

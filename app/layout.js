@@ -3,15 +3,27 @@ import Navbar from '@components/Navbar';
 import Providers from './Providers';
 
 
-
 export const metadata = {
   title: 'Laboratorios',
   description: 'Laboratorios',
+  icons:{
+    icon:[
+      '/favicon.ico?v=4'
+    ],
+    apple:[
+      '/apple-touch-icon.png?v=4'
+    ],
+    shortcut:[
+      '/apple-touch-icon.png'
+    ]
+  },
+  manifest: '/site.webmanifest',
 }
 
 export default function RootLayout({ children }) {
   return (
     <html lang="es">
+
     <body className='min-h-screen flex flex-col'>
       <Providers>
         

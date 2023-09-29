@@ -1,127 +1,198 @@
-"use client";
+"use client"
 import { useState } from 'react';
-import axios from 'axios';
-import { useRouter } from 'next/navigation';
+import { useForm, Controller } from 'react-hook-form';
+import DatePicker from 'react-datepicker'; // Para seleccionar fechas
+import 'react-datepicker/dist/react-datepicker.css';
 
 function CompraForm() {
-    const router = useRouter();
-    const [formData, setFormData] = useState({
-        nombre: '',
-        descripcion: '',
-        precio_unitario: '',
-        unidad_medida: '',
-        proveedor: '',
-        cantidad: '',
-    });
-    const [errors, setErrors] = useState(null);
+  const {
+    handleSubmit,
+    control,
+    register,
+    formState: { errors },
+  } = useForm();
+  const [insumos, setInsumos] = useState([
+    {
+      insumo: '',
+      cantidad: '',
+      precioUnitario: '',
+    },
+  ]);
+  const [lotes, setLotes] = useState([
+    {
+      numeroLote: '',
+      fechaVencimiento: null,
+      cantidad: '',
+    },
+  ]);
 
-    async function handleSubmit(e) {
-        e.preventDefault();
-        console.log(formData)
-        // Validaciones (agrega aquí tus validaciones personalizadas)
+  const onSubmit = (data) => {
+    // Aquí puedes enviar los datos al servidor
+    console.log(data);
+  };
 
-        try {
-        const res = await axios.post('/api/insumos', formData);
-        //console.log(res.data);
+  const handleAddInsumo = () => {
+    setInsumos([...insumos, { insumo: '', cantidad: '', precioUnitario: '' }]);
+  };
 
-        // Si el envío fue exitoso, puedes redirigir o hacer otras acciones
-        if (res.status === 200) {
-            router.push('/ruta-de-exito'); // Reemplaza 'ruta-de-exito' con la URL correcta
-        }
-        } catch (error) {
-        console.error(error);
-        setErrors('Hubo un error al enviar los datos. Por favor, inténtalo de nuevo.'); // Mensaje de error personalizado
-        }
-    }
+  const handleRemoveInsumo = (index) => {
+    const newInsumos = [...insumos];
+    newInsumos.splice(index, 1);
+    setInsumos(newInsumos);
+  };
 
-    return (
-        <div className="max-w-md mx-auto mt-8 p-4 bg-white rounded-lg shadow-md">
-        <h2 className="text-2xl font-semibold mb-4">Formulario de Insumos</h2>
-        {errors && (
-            <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
-            <strong className="font-bold">Error:</strong> {errors}
-            </div>
-        )}
-        <form onSubmit={handleSubmit}>
-            <div className="mb-4">
-            <label htmlFor="nombre" className="block text-gray-600">Nombre:</label>
+  const handleAddLote = () => {
+    setLotes([...lotes, { numeroLote: '', fechaVencimiento: null, cantidad: '' }]);
+  };
+
+  const handleRemoveLote = (index) => {
+    const newLotes = [...lotes];
+    newLotes.splice(index, 1);
+    setLotes(newLotes);
+  };
+
+  return (
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <div className="mb-4">
+        <label htmlFor="almacen" className="block text-gray-600">
+          Almacen:
+        </label>
+        <input
+          type="text"
+          id="almacen"
+          {...register('almacen', { required: true })}
+          className="border rounded-md p-2 w-full"
+        />
+        {errors.almacen && <p className="text-red-500">Este campo es requerido</p>}
+      </div>
+
+      {/* Agrega más campos del formulario aquí, como procedencia, solicitante, etc. */}
+
+      {/* Insumos */}
+      <h2 className="text-lg font-semibold mt-4">Insumos</h2>
+      {insumos.map((insumo, index) => (
+        <div key={index} className="grid grid-cols-4 gap-4">
+          <div>
+            <label htmlFor={`insumos[${index}].insumo`} className="block text-gray-600">
+              Insumo:
+            </label>
             <input
-                type="text"
-                id="nombre"
-                name="nombre"
-                value={formData.nombre}
-                onChange={(e) => setFormData({ ...formData, nombre: e.target.value })}
-                required
-                className="border rounded-md py-2 px-3 w-full bg-opacity-10 bg-black text-gray-700"
+              type="text"
+              id={`insumos[${index}].insumo`}
+              {...register(`insumos[${index}].insumo`, { required: true })}
+              className="border rounded-md p-2 w-full"
             />
-            </div>
-            <div className="mb-4">
-            <label htmlFor="descripcion" className="block text-gray-600">Descripción:</label>
+          </div>
+          <div>
+            <label htmlFor={`insumos[${index}].cantidad`} className="block text-gray-600">
+              Cantidad:
+            </label>
             <input
-                type="text"
-                id="descripcion"
-                name="descripcion"
-                value={formData.descripcion}
-                onChange={(e) => setFormData({ ...formData, descripcion: e.target.value })}
-                required
-                className="border rounded-md py-2 px-3 w-full bg-opacity-10 bg-black text-gray-700"
+              type="number"
+              id={`insumos[${index}].cantidad`}
+              {...register(`insumos[${index}].cantidad`, { required: true })}
+              className="border rounded-md p-2 w-full"
             />
-            </div>
-            <div className="mb-4">
-            <label htmlFor="precio_unitario" className="block text-gray-600">Precio Unitario:</label>
+          </div>
+          <div>
+            <label htmlFor={`insumos[${index}].precioUnitario`} className="block text-gray-600">
+              Precio Unitario:
+            </label>
             <input
-                type="number"
-                id="precio_unitario"
-                name="precio_unitario"
-                value={formData.precio_unitario}
-                onChange={(e) => setFormData({ ...formData, precio_unitario: e.target.value })}
-                required
-                className="border rounded-md py-2 px-3 w-full bg-opacity-10 bg-black text-gray-700"
+              type="number"
+              id={`insumos[${index}].precioUnitario`}
+              {...register(`insumos[${index}].precioUnitario`, { required: true })}
+              className="border rounded-md p-2 w-full"
             />
-            </div>
-            <div className="mb-4">
-            <label htmlFor="unidad_medida" className="block text-gray-600">Unidad de Medida:</label>
-            <input
-                type="text"
-                id="unidad_medida"
-                name="unidad_medida"
-                value={formData.unidad_medida}
-                onChange={(e) => setFormData({ ...formData, unidad_medida: e.target.value })}
-                required
-                className="border rounded-md py-2 px-3 w-full bg-opacity-10 bg-black text-gray-700"
-            />
-            </div>
-            <div className="mb-4">
-            <label htmlFor="proveedor" className="block text-gray-600">Proveedor:</label>
-            <input
-                type="text"
-                id="proveedor"
-                name="proveedor"
-                value={formData.proveedor}
-                onChange={(e) => setFormData({ ...formData, proveedor: e.target.value })}
-                required
-                className="border rounded-md py-2 px-3 w-full bg-opacity-10 bg-black text-gray-700"
-            />
-            </div>
-            <div className="mb-4">
-            <label htmlFor="cantidad" className="block text-gray-600">Cantidad inicial:</label>
-            <input
-                type="number"
-                id="cantidad"
-                name="cantidad"
-                value={formData.cantidad}
-                onChange={(e) => setFormData({ ...formData, cantidad: e.target.value })}
-                className="border rounded-md py-2 px-3 w-full bg-opacity-10 bg-black text-gray-700"
-            />
-            </div>
-            <div className="text-center">
-            <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">
-                Enviar
+          </div>
+          <div>
+            <button
+              type="button"
+              onClick={() => handleRemoveInsumo(index)}
+              className="bg-red-500 text-white py-2 px-4 rounded-md mt-2 hover:bg-red-600"
+            >
+              Eliminar
             </button>
-            </div>
-        </form>
+          </div>
         </div>
-    );
+      ))}
+      <button
+        type="button"
+        onClick={handleAddInsumo}
+        className="bg-blue-500 text-white py-2 px-4 rounded-md mt-2 hover:bg-blue-600"
+      >
+        Agregar Insumo
+      </button>
+
+      {/* Lotes */}
+      <h2 className="text-lg font-semibold mt-4">Lotes</h2>
+      {lotes.map((lote, index) => (
+        <div key={index} className="grid grid-cols-4 gap-4">
+          <div>
+            <label htmlFor={`lotes[${index}].numeroLote`} className="block text-gray-600">
+              Número de Lote:
+            </label>
+            <input
+              type="text"
+              id={`lotes[${index}].numeroLote`}
+              {...register(`lotes[${index}].numeroLote`, { required: true })}
+              className="border rounded-md p-2 w-full"
+            />
+          </div>
+          <div>
+            <label htmlFor={`lotes[${index}].fechaVencimiento`} className="block text-gray-600">
+              Fecha de Vencimiento:
+            </label>
+            <Controller
+              name={`lotes[${index}].fechaVencimiento`}
+              control={control}
+              render={({ field }) => (
+                <DatePicker
+                  {...field}
+                  selected={field.value}
+                  dateFormat="yyyy-MM-dd"
+                  className="border rounded-md p-2 w-full"
+                />
+              )}
+            />
+          </div>
+          <div>
+            <label htmlFor={`lotes[${index}].cantidad`} className="block text-gray-600">
+              Cantidad:
+            </label>
+            <input
+              type="number"
+              id={`lotes[${index}].cantidad`}
+              {...register(`lotes[${index}].cantidad`, { required: true })}
+              className="border rounded-md p-2 w-full"
+            />
+          </div>
+          <div>
+            <button
+              type="button"
+              onClick={() => handleRemoveLote(index)}
+              className="bg-red-500 text-white py-2 px-4 rounded-md mt-2 hover:bg-red-600"
+            >
+              Eliminar
+            </button>
+          </div>
+        </div>
+      ))}
+      <button
+        type="button"
+        onClick={handleAddLote}
+        className="bg-blue-500 text-white py-2 px-4 rounded-md mt-2 hover:bg-blue-600"
+      >
+        Agregar Lote
+      </button>
+
+      <div className="mt-4">
+        <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">
+          Enviar
+        </button>
+      </div>
+    </form>
+  );
 }
 
 export default CompraForm;

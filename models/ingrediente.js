@@ -34,7 +34,7 @@ const ingredientSchema = new Schema({
         type: Date,
         default: Date.now(),
     },
-    cantidad:{
+    existencia:{
         type: Number,
     },    
 });
