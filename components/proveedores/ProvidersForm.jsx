@@ -10,6 +10,7 @@ function ProviderForm () {
     nombre: '',
     direccion: '',
     telefono: '',
+    email: '',
   });
   const [errors, setErrors] = useState({});
 
@@ -23,7 +24,7 @@ function ProviderForm () {
   const handleSubmit = async (e) => {
     e.preventDefault();
     //crea las validaciones para formData donde en el nombre no se acepten numeros en telefono sea de 8 digitos y ningun campo debe estar vacio 
-    if(formData.nombre === '' || formData.direccion === '' || formData.telefono === ''){
+    if(formData.nombre === '' || formData.direccion === '' || formData.telefono === '' || formData.email === ''){
     setErrors({message: 'Todos los campos son obligatorios'})
       return
     }
@@ -61,7 +62,8 @@ function ProviderForm () {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="w-full max-w-md mx-auto bg-teal-400 p-6 rounded-md bg-opacity-20 shadow-md">
+    <form onSubmit={handleSubmit} className="w-full max-w-md mx-auto bg-white p-6 rounded-md bg-opacity-80 shadow-md">
+      <h2 className="text-center uppercase underline text-2xl mb-6 my-3 font-bold text-slate-700">formulario proveedores</h2>
     {errors.message && (
       <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
         <strong className="font-bold">Error! </strong>
@@ -77,7 +79,7 @@ function ProviderForm () {
         value={formData.nombre}
         onChange={handleInputChange}
         required
-        className="border rounded-md py-2 px-3 w-full bg-opacity-20 bg-teal-800 text-gray-700"
+        className="border rounded-md py-2 px-3 w-full text-gray-700"
       />
     </div>
     <div className="mb-4">
@@ -93,7 +95,7 @@ function ProviderForm () {
       />
     </div>
     <div className="mb-4">
-    <label htmlFor="nombre" className="block text-slate-800 font-bold lg:text-xl italic mb-1">Celular:</label>
+      <label htmlFor="nombre" className="block text-slate-800 font-bold lg:text-xl italic mb-1">Celular:</label>
       <input
         type="tel"
         id="telefono"
@@ -104,9 +106,22 @@ function ProviderForm () {
         className="border rounded-md py-2 px-3 w-full text-gray-700"
       />
     </div>
+    <div className="mb-4">
+      <label className="block text-slate-800 font-bold lg:text-xl italic mb-1">Correo electronico:</label>
+      <input
+        type="email"
+        id="email"
+        name="email"
+        value={formData.email}
+        onChange={handleInputChange}
+        required
+        className="border rounded-md py-2 px-3 w-full text-gray-700"
+      />
+    </div>
+    
     <div className="text-center">
       <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">
-        Enviar
+        Añadir Proveedor
       </button>
     </div>
   </form>

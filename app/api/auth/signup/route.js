@@ -3,7 +3,7 @@ import User from '@/models/user'
 import connectMongoDB from "@/libs/mongodb";
 import bcrypt from "bcrypt";
 
-const REQUIRED_EMPLOYEE_CODE = '8344193';
+const REQUIRED_EMPLOYEE_CODE = '123456';
 
 export async function POST(request) {
     try {

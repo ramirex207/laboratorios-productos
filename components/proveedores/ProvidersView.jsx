@@ -12,6 +12,7 @@ function ProvidersView({proveedores}) {
             <th className="px-6 py-3 text-left text-xs font-medium text-gray-200 uppercase tracking-wider">Nombre</th>
             <th className="px-6 py-3 text-left text-xs font-medium text-gray-200 uppercase tracking-wider">Dirección</th>
             <th className="px-6 py-3 text-left text-xs font-medium text-gray-200 uppercase tracking-wider">Telefono</th>
+            <th className="px-6 py-3 text-left text-xs font-medium text-gray-200 uppercase tracking-wider">Correo</th>
             <th className="px-6 py-3 text-left text-xs font-medium text-gray-200 uppercase tracking-wider">Acciones</th>
           </tr>
         </thead>
@@ -27,6 +28,9 @@ function ProvidersView({proveedores}) {
               </td>
               <td className="px-6 py-3 whitespace-nowrap">
                 <p className="text-sm text-gray-500">{user.telefono}</p>
+              </td>
+              <td className="px-6 py-3 whitespace-nowrap">
+                <p className="text-sm text-gray-500">{user.email}</p>
               </td>
               <td className="px-6 py-3 whitespace-nowrap">
                 <button className="text-indigo-600 hover:text-indigo-900">Edit</button>

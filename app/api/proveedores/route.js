@@ -3,10 +3,14 @@ import Proveedor from "@/models/proveedor";
 import { NextResponse } from "next/server";
 
 export async function POST(request) {
-  const { nombre, direccion, telefono } = await request.json();
-  await connectMongoDB();
-  await Proveedor.create({ nombre, direccion,telefono });
-  return NextResponse.json({ message: "Proveedor creado" }, { status: 201 });
+  try {
+    const { nombre, direccion, telefono, email } = await request.json();
+    await connectMongoDB();
+    await Proveedor.create({ nombre, direccion,telefono,email });
+    return NextResponse.json({ message: "Proveedor creado" }, { status: 201 });  
+  } catch (error) {
+    return NextResponse.json({ error });
+  }
 }
 
 export async function GET() {

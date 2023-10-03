@@ -18,6 +18,12 @@ const proveedorSchema = new Schema({
         required: [true, "telefono es requerido"],
         min: [0, "telefono debe ser mayor a 0"],
     },
+    email: {
+        type: String,
+        required: [true, "email es requerido"],
+        minlength: [3, "email debe tener al menos 3 caracteres"],
+        maxlength: [50, "email debe tener menos de 50 caracteres"],
+    },
 });
 
 export default models.Proveedor || model("Proveedor", proveedorSchema);

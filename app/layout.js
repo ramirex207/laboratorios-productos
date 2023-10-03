@@ -4,8 +4,8 @@ import Providers from './Providers';
 
 
 export const metadata = {
-  title: 'Laboratorios',
-  description: 'Laboratorios',
+  title: 'VAMASOL',
+  description: 'SPA para la gestion de inventarios para la empresa VAMASOL',
   icons:{
     icon:[
       '/favicon.ico?v=4'

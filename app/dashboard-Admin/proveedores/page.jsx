@@ -21,6 +21,7 @@ async function getUsers(){
 
 async function ProveedoresPage() {
   const {proveedores} = await getUsers();
+  proveedores.sort((a,b) => a.nombre.localeCompare(b.nombre))
   //console.log(proveedores)
   return (
     <div>

@@ -24,7 +24,8 @@ async function getInsumos(){
 
 async function InsumosPage() {
   const {insumos} = await getInsumos();
-  console.log(insumos)
+  insumos.sort((a, b) => a.nombre.localeCompare(b.nombre));
+  
   return (
     <div>
       <div className="flex mx-2">

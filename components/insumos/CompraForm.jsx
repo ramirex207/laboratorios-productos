@@ -3,8 +3,10 @@ import { useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import DatePicker from 'react-datepicker'; // Para seleccionar fechas
 import 'react-datepicker/dist/react-datepicker.css';
+import axios from 'axios';
 
-function CompraForm() {
+
+function CompraForm({insumosData}) {
   const {
     handleSubmit,
     control,
@@ -26,10 +28,10 @@ function CompraForm() {
     },
   ]);
 
-  const onSubmit = (data) => {
-    
+  const onSubmit = async (data) => {
+    const res = await axios.post('/api/insumos/compra', data);
     // Aquí puedes enviar los datos al servidor
-    console.log(data);
+    console.log(res);
   };
 
   const handleAddInsumo = () => {
@@ -74,6 +76,18 @@ function CompraForm() {
           type="text"
           id="procedencia"
           {...register('procedencia', { required: true })}
+          className="border rounded-md p-2 w-full"
+        />
+        {errors.almacen && <p className="text-red-500">Este campo es requerido</p>}
+      </div>
+      <div className="mb-4">
+        <label htmlFor="procedencia" className="block text-gray-600">
+          solicitante:
+        </label>
+        <input
+          type="text"
+          id="solicitante"
+          {...register('solicitante', { required: true })}
           className="border rounded-md p-2 w-full"
         />
         {errors.almacen && <p className="text-red-500">Este campo es requerido</p>}
@@ -137,67 +151,6 @@ function CompraForm() {
         Agregar Insumo
       </button>
 
-      {/* Lotes */}
-      <h2 className="text-lg font-semibold mt-4">Lotes</h2>
-      {lotes.map((lote, index) => (
-        <div key={index} className="grid grid-cols-4 gap-4">
-          <div>
-            <label htmlFor={`lotes[${index}].numeroLote`} className="block text-gray-600">
-              Número de Lote:
-            </label>
-            <input
-              type="text"
-              id={`lotes[${index}].numeroLote`}
-              {...register(`lotes[${index}].numeroLote`, { required: true })}
-              className="border rounded-md p-2 w-full"
-            />
-          </div>
-          <div>
-            <label htmlFor={`lotes[${index}].fechaVencimiento`} className="block text-gray-600">
-              Fecha de Vencimiento:
-            </label>
-            <Controller
-              name={`lotes[${index}].fechaVencimiento`}
-              control={control}
-              render={({ field }) => (
-                <DatePicker
-                  {...field}
-                  selected={field.value}
-                  dateFormat="yyyy-MM-dd"
-                  className="border rounded-md p-2 w-full"
-                />
-              )}
-            />
-          </div>
-          <div>
-            <label htmlFor={`lotes[${index}].cantidad`} className="block text-gray-600">
-              Cantidad:
-            </label>
-            <input
-              type="number"
-              id={`lotes[${index}].cantidad`}
-              {...register(`lotes[${index}].cantidad`, { required: true })}
-              className="border rounded-md p-2 w-full"
-            />
-          </div>
-          <div>
-            <button
-              type="button"
-              onClick={() => handleRemoveLote(index)}
-              className="bg-red-500 text-white py-2 px-4 rounded-md mt-2 hover:bg-red-600"
-            >
-              Eliminar
-            </button>
-          </div>
-        </div>
-      ))}
-      <button
-        type="button"
-        onClick={handleAddLote}
-        className="bg-blue-500 text-white py-2 px-4 rounded-md mt-2 hover:bg-blue-600"
-      >
-        Agregar Lote
-      </button>
 
       <div className="mt-4">
         <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">

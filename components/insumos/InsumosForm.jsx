@@ -3,7 +3,11 @@ import { useState } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 
-function InsumosForm() {
+
+function InsumosForm({proveedores, medidas}) {
+  //console.log(medidas)
+  
+  //console.log(proveedores)
   const router = useRouter();
   const [formData, setFormData] = useState({
     nombre: '',
@@ -11,18 +15,18 @@ function InsumosForm() {
     precio_unitario: '',
     unidad_medida: '',
     proveedor: '',
-    cantidad: '',
+    existencia: '',
   });
   const [errors, setErrors] = useState(null);
 
   async function handleSubmit(e) {
     e.preventDefault();
-    console.log(formData)
+    //console.log(formData)
     // Validaciones (agrega aquí tus validaciones personalizadas)
 
     try {
       const res = await axios.post('/api/insumos', formData);
-      //console.log(res.data);
+     // console.log(res.data);
 
       // Si el envío fue exitoso, puedes redirigir o hacer otras acciones
       if (res.status === 200) {
@@ -68,7 +72,7 @@ function InsumosForm() {
           />
         </div>
         <div className="mb-4">
-          <label htmlFor="precio_unitario" className="block text-gray-600">Precio Unitario:</label>
+          <label htmlFor="precio_unitario" className="block text-gray-600">Precio por unidad en Bs.:</label>
           <input
             type="number"
             id="precio_unitario"
@@ -80,28 +84,42 @@ function InsumosForm() {
           />
         </div>
         <div className="mb-4">
-          <label htmlFor="unidad_medida" className="block text-gray-600">Unidad de Medida:</label>
-          <input
-            type="text"
+          <label className="block text-gray-600">Unidad de medida:</label>
+          <select
             id="unidad_medida"
             name="unidad_medida"
             value={formData.unidad_medida}
             onChange={(e) => setFormData({ ...formData, unidad_medida: e.target.value })}
-            required
             className="border rounded-md py-2 px-3 w-full bg-opacity-10 bg-black text-gray-700"
-          />
-        </div>
+          >
+            <option value="">Selecciona una unidad de medida</option>
+            {medidas.map((medida) => (
+              <option key={medida.id} value={medida.nombre}>
+                {medida.nombre}
+              </option>
+            ))}
+          
+          </select>
+          
+            </div>
         <div className="mb-4">
           <label htmlFor="proveedor" className="block text-gray-600">Proveedor:</label>
-          <input
-            type="text"
+          <select
             id="proveedor"
             name="proveedor"
             value={formData.proveedor}
             onChange={(e) => setFormData({ ...formData, proveedor: e.target.value })}
-            required
             className="border rounded-md py-2 px-3 w-full bg-opacity-10 bg-black text-gray-700"
-          />
+          >
+            <option value="">Selecciona un proveedor</option>
+            {proveedores.map((proveedor) => (
+              <option key={proveedor._id} value={proveedor._id}>
+                {proveedor.nombre}
+              </option>
+            ))}
+          
+          </select>
+          
         </div>
         <div className="mb-4">
           <label htmlFor="cantidad" className="block text-gray-600">Cantidad inicial:</label>
@@ -109,8 +127,8 @@ function InsumosForm() {
             type="number"
             id="cantidad"
             name="cantidad"
-            value={formData.cantidad}
-            onChange={(e) => setFormData({ ...formData, cantidad: e.target.value })}
+            value={formData.existencia}
+            onChange={(e) => setFormData({ ...formData, existencia: e.target.value })}
             className="border rounded-md py-2 px-3 w-full bg-opacity-10 bg-black text-gray-700"
           />
         </div>
