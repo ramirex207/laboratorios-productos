@@ -1,10 +1,6 @@
 import { Schema, models, model } from "mongoose";
 
-const loteSchema = new Schema({
-    numeroLote: String,
-    fechaVencimiento: Date,
-    cantidad: Number,
-  });
+
 const CompraInsumoSchema = new Schema({
     
     almacen:{
@@ -34,6 +30,10 @@ const CompraInsumoSchema = new Schema({
         type: Date,
         
     },
+    fecha_vencimiento:{
+        type: Date,
+        
+    },
     nombreDepartamento:{
         type: String,
     },
@@ -47,10 +47,9 @@ const CompraInsumoSchema = new Schema({
             precioUnitario: Number,
         },
     ],
-    lote:[loteSchema],
-    existencia:{
-        type: Number,
-    },  
+    cantidad: Number,
+    precio_unitario: Number,
+    total: Number,  
 });
 
 export default models.CompraInsumo || model("CompraInsumo", CompraInsumoSchema);

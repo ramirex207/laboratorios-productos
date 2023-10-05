@@ -2,14 +2,12 @@
 import React, { useState, useEffect } from "react";
 import Link from 'next/link';
 import {ImLab, ImUsers} from 'react-icons/im'
-import { useSession } from "next-auth/react";
-
-import { FaUsers,FaUser,  FaUserMd, FaUserInjured,FaUserNurse,FaCalendarAlt, FaChartBar, FaCommentMedical,FaClinicMedical, FaClipboardList, FaBriefcaseMedical, FaCogs, FaBoxes } from 'react-icons/fa'
+import { FaUsers,FaUser,  FaUserMd, FaUserInjured,FaUserNurse,FaCalendarAlt, FaChartBar, FaCommentMedical,FaClinicMedical, FaClipboardList, FaBriefcaseMedical, FaCogs, FaBoxes, FaShoppingCart } from 'react-icons/fa'
 
 
 
-function Aside() {
-  const {data:session,status} = useSession()
+function Aside({user}) {
+  
   //console.log(session,status)
   const [menuVisible, setMenuVisible] = useState(false);
   const toggleMenu = () => {
@@ -59,9 +57,9 @@ function Aside() {
               
             </div>
             <div>
-              <h2 className="text-center">{session.user.name}</h2>
-              <h2 className="text-center">{session.user.email}</h2>
-              <h2 className="text-center">{session.user.role}</h2>
+              <h2 className="text-center">{user.name}</h2>
+              <h2 className="text-center">{user.email}</h2>
+              
             </div>
               <ul className=" lg:min-h-[100vh] lg:block  ">
               <Link href='/dashboard-Admin/proveedores' className="hover:text-slate-400 " onClick={hideMenuOnClick}>
@@ -81,6 +79,14 @@ function Aside() {
                   </h4>
                 </li>
               </Link>
+              <Link href='/dashboard-Admin/compras' className="hover:text-slate-400 " onClick={hideMenuOnClick}>
+                <li className="m-4 my-4 pr-2 border-r-2 flex items-center">
+                  <FaShoppingCart className="mr-2" />
+                  <h4 className="transition duration-300 ease-in-out transform hover:translate-x-3">
+                    Gestión de Compras
+                  </h4>
+                </li>
+              </Link>
               <Link href='/dashboard-Admin/productos' className="hover:text-slate-400 " onClick={hideMenuOnClick}>
                 <li className="m-4 my-4 pr-2 border-r-2 flex items-center">
                   <ImLab className="mr-2" />
@@ -89,6 +95,7 @@ function Aside() {
                   </h4>
                 </li>
               </Link>
+              
               <Link href='/dashboard-Admin/usuarios' className="hover:text-slate-400" onClick={hideMenuOnClick}>
                 <li className="m-4 pr-2 my-4 border-r-2 flex items-center">
                   <ImUsers className="mr-2" />

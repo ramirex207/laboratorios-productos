@@ -6,7 +6,11 @@ import 'react-datepicker/dist/react-datepicker.css';
 import axios from 'axios';
 
 
-function CompraForm({insumosData}) {
+
+function CompraForm({ingredientes, user}) {
+  //console.log(user)
+  //console.log(ingredientes)
+
   const {
     handleSubmit,
     control,
@@ -20,18 +24,18 @@ function CompraForm({insumosData}) {
       precioUnitario: '',
     },
   ]);
-  const [lotes, setLotes] = useState([
-    {
-      numeroLote: '',
-      fechaVencimiento: null,
-      cantidad: '',
-    },
-  ]);
 
-  const onSubmit = async (data) => {
-    const res = await axios.post('/api/insumos/compra', data);
-    // Aquí puedes enviar los datos al servidor
-    console.log(res);
+
+  async function onSubmit(data){
+    try {
+      //console.log(data)
+      const res = await axios.post('/api/insumos/compra', data);
+      console.log(res);  
+      
+    } catch (error) {
+      console.log(error)
+    }
+    
   };
 
   const handleAddInsumo = () => {
@@ -44,56 +48,104 @@ function CompraForm({insumosData}) {
     setInsumos(newInsumos);
   };
 
-  const handleAddLote = () => {
-    setLotes([...lotes, { numeroLote: '', fechaVencimiento: null, cantidad: '' }]);
-  };
-
-  const handleRemoveLote = (index) => {
-    const newLotes = [...lotes];
-    newLotes.splice(index, 1);
-    setLotes(newLotes);
-  };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <div className="mb-4">
-        <label htmlFor="almacen" className="block text-gray-600">
-          Almacen:
-        </label>
-        <input
-          type="text"
-          id="almacen"
-          {...register('almacen', { required: true })}
-          className="border rounded-md p-2 w-full"
-        />
-        {errors.almacen && <p className="text-red-500">Este campo es requerido</p>}
-      </div>
-      <div className="mb-4">
-        <label htmlFor="procedencia" className="block text-gray-600">
-          Procedencia:
-        </label>
-        <input
-          type="text"
-          id="procedencia"
-          {...register('procedencia', { required: true })}
-          className="border rounded-md p-2 w-full"
-        />
-        {errors.almacen && <p className="text-red-500">Este campo es requerido</p>}
-      </div>
-      <div className="mb-4">
-        <label htmlFor="procedencia" className="block text-gray-600">
-          solicitante:
-        </label>
-        <input
-          type="text"
-          id="solicitante"
-          {...register('solicitante', { required: true })}
-          className="border rounded-md p-2 w-full"
-        />
-        {errors.almacen && <p className="text-red-500">Este campo es requerido</p>}
-      </div>
+    <form onSubmit={handleSubmit(onSubmit)} className='bg-slate-50 p-3 rounded-md shadow-lg'>
+      <h1 className='font-bold text-center uppercase my-5 italic text-2xl '>solicitud de compra</h1>
+      <div className="mb-4 grid lg:grid-cols-3 gap-4 justify-evenly items-center">
+        <div className=''>
+          <label className="mr-2 text-gray-600">
+            Almacen:
+          </label>
+          <input
+            type="text"
+            id="almacen"
+            {...register('almacen', { required: true })}
+            className="border rounded-md p-2"
+          />
+          {errors.almacen && <p className="text-red-500">El nombre del almacen es requerido</p>}
+        </div>
 
-      {/* Agrega más campos del formulario aquí, como procedencia, solicitante, etc. */}
+        <div className=''>
+          <label className='mr-2 text-gray-600'>
+            Procedencia:
+          </label>
+          <select
+            name="procedencia"
+            id="procedencia"
+            {...register('procedencia', { required: true })}
+            className="border rounded-md py-2 px-3 max-w-md text-gray-700"
+          >
+            <option value="">Selecciona una procedencia</option>
+            <option value="Nacional">Nacional</option>
+            <option value="Importacion">Internacional</option>
+            <option value="Interna">Interna</option>
+          </select>
+          {errors.procedencia && <p className="text-red-500">la procedencia es requerida</p>}
+        </div>
+
+        <div className=''>
+          <label className="mr-2 text-gray-600">
+            Solicitante:
+          </label>
+          <input
+            type="text"
+            id="solicitante"
+            defaultValue={user.name}
+            {...register('solicitante', { required: true })}
+            
+            className="border rounded-md p-2"
+          />
+          {errors.solicitante && <p className="text-red-500">El nombre del solicitante es requerido</p>}
+        </div>
+        <div>
+          <label className="block text-gray-600">
+            Fecha de solicitud:
+          </label>
+          <Controller
+            name={`fecha_solicitud`}
+            control={control}
+            render={({ field }) => (
+              <DatePicker
+                {...field}
+                selected={field.value}
+                dateFormat="dd-MM-yyyy"
+                className="border rounded-md p-2 w-full"
+              />
+            )}
+          />
+        </div>
+
+        <div>
+          <label className="block text-gray-600">
+            Fecha de requerida:
+          </label>
+          <Controller
+            name={`fecha_requerida`}
+            control={control}
+            render={({ field }) => (
+              <DatePicker
+                {...field}
+                selected={field.value}
+                dateFormat="dd-MM-yyyy"
+                className="border rounded-md p-2 w-full"
+              />
+            )}
+          />
+        </div>
+        <div className='m-2'>
+          <label className="mr-2 text-gray-600">
+            Departamento o area:
+          </label>
+          <input
+            type="text"
+            id="nombreDepartamento"
+            {...register('nombreDepartamento', { required: true })}
+            className="border rounded-md p-2"
+          />
+          {errors.solicitante && <p className="text-red-500">El nombre del solicitante es requerido</p>}
+        </div>
+      </div>
 
       {/* Insumos */}
       <h2 className="text-lg font-semibold mt-4">Insumos</h2>
@@ -103,12 +155,21 @@ function CompraForm({insumosData}) {
             <label htmlFor={`insumos[${index}].insumo`} className="block text-gray-600">
               Insumo:
             </label>
-            <input
-              type="text"
+            
+            <select
               id={`insumos[${index}].insumo`}
               {...register(`insumos[${index}].insumo`, { required: true })}
               className="border rounded-md p-2 w-full"
-            />
+              
+            >
+            <option value="">Selecciona un insumo</option>
+            {ingredientes.map((proveedor) => (
+              <option key={proveedor._id} value={proveedor._id}>
+                {proveedor.nombre}
+              </option>
+            ))}
+          
+          </select>
           </div>
           <div>
             <label htmlFor={`insumos[${index}].cantidad`} className="block text-gray-600">
@@ -130,6 +191,7 @@ function CompraForm({insumosData}) {
               id={`insumos[${index}].precioUnitario`}
               {...register(`insumos[${index}].precioUnitario`, { required: true })}
               className="border rounded-md p-2 w-full"
+              
             />
           </div>
           <div>
@@ -150,8 +212,6 @@ function CompraForm({insumosData}) {
       >
         Agregar Insumo
       </button>
-
-
       <div className="mt-4">
         <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">
           Enviar
