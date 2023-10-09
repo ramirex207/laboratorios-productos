@@ -37,6 +37,8 @@ const CompraInsumoSchema = new Schema({
     nombreDepartamento:{
         type: String,
     },
+    precio_unitario: Number,
+    total: Number, 
     insumos: [
         {
             insumo: {
@@ -45,11 +47,11 @@ const CompraInsumoSchema = new Schema({
             },
             cantidad: Number,
             precioUnitario: Number,
+            nombre: String,
+            total: Number,
         },
     ],
-    cantidad: Number,
-    precio_unitario: Number,
-    total: Number,  
+   
 });
 
 export default models.CompraInsumo || model("CompraInsumo", CompraInsumoSchema);

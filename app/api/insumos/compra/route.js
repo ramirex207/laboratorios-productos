@@ -23,8 +23,8 @@ export async function GET() {
   try {
 
   await connectMongoDB();
-  const insumos = await CompraInsumo.find();
-  return NextResponse.json({ insumos });
+  const compras = await CompraInsumo.find();
+  return NextResponse.json({ compras });
     
   } catch (error) {
     return NextResponse.json({ error });

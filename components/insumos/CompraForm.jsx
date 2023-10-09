@@ -4,13 +4,14 @@ import { useForm, Controller } from 'react-hook-form';
 import DatePicker from 'react-datepicker'; // Para seleccionar fechas
 import 'react-datepicker/dist/react-datepicker.css';
 import axios from 'axios';
+import es from 'date-fns/locale/es'; 
 
 
 
 function CompraForm({ingredientes, user}) {
   //console.log(user)
   //console.log(ingredientes)
-
+  const [nombreInsumo, setNombreInsumo] = useState(''); // Agrega el estado para el nombre del insumo
   const {
     handleSubmit,
     control,
@@ -22,13 +23,14 @@ function CompraForm({ingredientes, user}) {
       insumo: '',
       cantidad: '',
       precioUnitario: '',
+      nombre: '',
     },
   ]);
 
 
   async function onSubmit(data){
     try {
-      //console.log(data)
+      console.log(data)
       const res = await axios.post('/api/insumos/compra', data);
       console.log(res);  
       
@@ -39,7 +41,15 @@ function CompraForm({ingredientes, user}) {
   };
 
   const handleAddInsumo = () => {
-    setInsumos([...insumos, { insumo: '', cantidad: '', precioUnitario: '' }]);
+    setInsumos([
+      ...insumos,
+      {
+        insumo: '',
+        cantidad: '',
+        precioUnitario: '',
+        nombre: '', 
+      },
+    ]);
   };
 
   const handleRemoveInsumo = (index) => {
@@ -47,7 +57,17 @@ function CompraForm({ingredientes, user}) {
     newInsumos.splice(index, 1);
     setInsumos(newInsumos);
   };
-
+  // Manejar el cambio en la selección de insumo
+  const handleInsumoChange = (index, value) => {
+    const newInsumos = [...insumos];
+    newInsumos[index].insumo = value;
+    const selectedIngrediente = ingredientes.find((ingrediente) => ingrediente._id === value);
+    if (selectedIngrediente) {
+      newInsumos[index].nombre = selectedIngrediente.nombre;
+      setNombreInsumo(selectedIngrediente.nombre); // Actualizar el estado de nombreInsumo
+    }
+    setInsumos(newInsumos);
+  };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className='bg-slate-50 p-3 rounded-md shadow-lg'>
@@ -109,6 +129,7 @@ function CompraForm({ingredientes, user}) {
               <DatePicker
                 {...field}
                 selected={field.value}
+                locale={es}
                 dateFormat="dd-MM-yyyy"
                 className="border rounded-md p-2 w-full"
               />
@@ -127,6 +148,7 @@ function CompraForm({ingredientes, user}) {
               <DatePicker
                 {...field}
                 selected={field.value}
+                locale={es}
                 dateFormat="dd-MM-yyyy"
                 className="border rounded-md p-2 w-full"
               />
@@ -155,22 +177,34 @@ function CompraForm({ingredientes, user}) {
             <label htmlFor={`insumos[${index}].insumo`} className="block text-gray-600">
               Insumo:
             </label>
-            
             <select
               id={`insumos[${index}].insumo`}
               {...register(`insumos[${index}].insumo`, { required: true })}
+              onChange={(e) => handleInsumoChange(index, e.target.value)}
               className="border rounded-md p-2 w-full"
-              
             >
-            <option value="">Selecciona un insumo</option>
-            {ingredientes.map((proveedor) => (
-              <option key={proveedor._id} value={proveedor._id}>
-                {proveedor.nombre}
-              </option>
-            ))}
-          
-          </select>
+              <option value="">Selecciona un insumo</option>
+              {ingredientes.map((ingrediente) => (
+                <option key={ingrediente._id} value={ingrediente._id}>
+                  {ingrediente.nombre}
+                </option>
+              ))}
+            </select>
           </div>
+              
+          <div className=''>
+            <label>
+              nombre y observaciones:
+            </label>
+            <input
+              type="text"
+              id={`insumos[${index}].nombre`}
+              defaultValue={insumo.nombre}
+              {...register(`insumos[${index}].nombre`, { required: true })}
+              className="border rounded-md p-2 w-full"
+            />
+          </div>
+        
           <div>
             <label htmlFor={`insumos[${index}].cantidad`} className="block text-gray-600">
               Cantidad:
@@ -191,7 +225,6 @@ function CompraForm({ingredientes, user}) {
               id={`insumos[${index}].precioUnitario`}
               {...register(`insumos[${index}].precioUnitario`, { required: true })}
               className="border rounded-md p-2 w-full"
-              
             />
           </div>
           <div>

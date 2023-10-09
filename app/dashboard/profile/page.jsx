@@ -5,7 +5,7 @@ function ProfilePage() {
     const { data: session, status } = useSession();
     console.log(session,status)
     if (status === 'loading') {
-        return <div>Loading...</div>;
+        return <div>Cargando...</div>;
     }
 
     if (!session) {

@@ -1,7 +1,7 @@
 import { Schema, models, model } from "mongoose";
 
 
-const ingredientSchema = new Schema({
+const insumoSchema = new Schema({
     nombre: {
         type: String,
         required: [true, "nombre es requerido"],
@@ -39,4 +39,4 @@ const ingredientSchema = new Schema({
     },    
 });
 
-export default models.Ingredient || model("Ingredient", ingredientSchema);
+export default models.Insumo || model("Insumo", insumoSchema);
